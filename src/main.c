@@ -5,20 +5,20 @@
 * DESCRIPTION: This code is a start point for engine.
 *
 */
-
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "../include/stb_image.h"
-
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+
+#ifdef ENABLE_OPENCL
+#include <CL/cl.h>
+#endif
 
 #include "../include/modificated_math.h"
 #include "../include/utils.h"
@@ -42,10 +42,17 @@ typedef struct {
   vec3 camera_position; // Добавьте позицию камеры
   vec3 camera_lookAt;   // Добавьте направление камеры
   int selected_object_id;
+
+#ifdef ENABLE_OPENCL
+  cl_context context;
+  cl_command_queue queue;
+  cl_program program;
+  cl_kernel kernel;
+#endif
 } Application;
 
 // ===========================================================
-// 
+//
 // Mouse callbacks and framebuffer callback. Now we can do something with our mouse ( if i program it later).
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
@@ -70,12 +77,75 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
   glViewport(0, 0, width, height); // TODO: In HDPI can be errors. I try in on MacBook 11.1. And have errors...
 }
 
+#ifdef ENABLE_OPENCL
+void init_opencl(Application* application) {
+  cl_int err;
+  cl_platform_id platform;
+  cl_device_id device;
+  cl_uint num_platforms, num_devices;
+
+  // Get platform and device information
+  err = clGetPlatformIDs(1, &platform, &num_platforms);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to get platform IDs\n");
+    return;
+  }
+
+  err = clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &device, &num_devices);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to get device IDs\n");
+    return;
+  }
+
+  // Create an OpenCL context
+  application->context = clCreateContext(NULL, 1, &device, NULL, NULL, &err);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to create OpenCL context\n");
+    return;
+  }
+
+  // Create a command queue
+  application->queue = clCreateCommandQueue(application->context, device, 0, &err);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to create command queue\n");
+    return;
+  }
+
+  // Load and build the OpenCL program
+  const char* source = "__kernel void sample_kernel(__global const float* input, __global float* output) { ... }";
+  application->program = clCreateProgramWithSource(application->context, 1, &source, NULL, &err);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to create OpenCL program\n");
+    return;
+  }
+
+  err = clBuildProgram(application->program, 1, &device, NULL, NULL, NULL);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to build OpenCL program\n");
+    return;
+  }
+
+  // Create the OpenCL kernel
+  application->kernel = clCreateKernel(application->program, "sample_kernel", &err);
+  if (err != CL_SUCCESS) {
+    fprintf(stderr, "Failed to create OpenCL kernel\n");
+    return;
+  }
+}
+
+void destroy_opencl(Application* application) {
+  clReleaseKernel(application->kernel);
+  clReleaseProgram(application->program);
+  clReleaseCommandQueue(application->queue);
+  clReleaseContext(application->context);
+}
+#endif
+
 Application* init_application(uint32_t width, uint32_t height, char* name) {
   if (!glfwInit()) {
     fprintf(stderr, "Failed to initialize GLFW\n");
     return NULL;
   }
-  
 
   // Set OPENGL VERSION.
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, CONTEXT_VERSION_MAJOR);
@@ -118,6 +188,11 @@ Application* init_application(uint32_t width, uint32_t height, char* name) {
   application->camera_position = (vec3){-20.0f, 0.0f, -3.0f}; // Инициализируйте позицию камеры
   application->camera_lookAt = (vec3){20.0f, 0.0f, 0.0f};     // Инициализируйте направление камеры
   application->selected_object_id = -1;
+
+#ifdef ENABLE_OPENCL
+  init_opencl(application);
+#endif
+
   return application;
 }
 
@@ -137,7 +212,6 @@ void prepare_to_render(Application* application) {
     }
     application->quad = quad_fs();
 }
-
 
 void event_handler(Application* application) {
     if (glfwGetKey(application->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -175,6 +249,10 @@ void destroy_application(Application* application) {
   // Do not free application->window_title as it is a string literal
   free(application);
   glfwTerminate();
+
+#ifdef ENABLE_OPENCL
+  destroy_opencl(application);
+#endif
 }
 
 void draw(Application* application) {

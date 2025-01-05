@@ -8,7 +8,6 @@ typedef struct {
 } vec3;
 
 
-
 // Функция для сложения двух векторов
 vec3 vec3_add(vec3 a, vec3 b) {
     return (vec3){a.x + b.x, a.y + b.y, a.z + b.z};
@@ -38,5 +37,4 @@ vec3 vec3_cross(vec3 a, vec3 b) {
         a.x * b.y - a.y * b.x
     };
 }
-
 #endif // VEC3_H_
