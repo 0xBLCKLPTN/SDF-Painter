@@ -7,13 +7,22 @@
       ninja
       pkg-config
       clang
+      gcc
+      opencl-headers
+
+      ocl-icd
     ];
+    shellHook = ''
+    export OPENCL_VENDOR_PATH=${pkgs.ocl-icd}/etc/OpenCL/vendors
+    '';
+    
     # Всякие библиотечные зависимости
     buildInputs = with pkgs; [
        openssl
        zlib
        glfw3
        glew
+       gsl
     ];
 }
 

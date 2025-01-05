@@ -4,7 +4,7 @@ glfw_dep = dependency('glfw3')
 glew_dep = dependency('glew')
 gl_dep = dependency('gl')
 opencl_dep = dependency('OpenCL')
-math_dep = dependency('m')
+#math_dep = dependency('m')
 
 sources = [
   'src/main.c',
@@ -17,4 +17,4 @@ include_dirs = [
   './include/imgui',
 ]
 
-executable('sdfe', sources, dependencies: [glfw_dep, glew_dep, gl_dep, math_dep, opencl_dep])
+executable('sdfe', sources, dependencies: [glfw_dep, glew_dep, gl_dep, opencl_dep])
