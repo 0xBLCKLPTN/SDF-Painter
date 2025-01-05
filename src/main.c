@@ -6,7 +6,7 @@
 *
 */
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <GL/freeglut.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "../include/stb_image.h"
@@ -35,7 +35,7 @@ typedef struct {
   vec2_uint32_t sizes;
   uint32_t width, height;
   char* window_title;
-  GLFWwindow* window;
+  int window;
   GLuint default_shader_program;
   QuadFS* quad; // Add a pointer to the QuadFS struct
   double mouse_x, mouse_y;
@@ -55,25 +55,25 @@ typedef struct {
 //
 // Mouse callbacks and framebuffer callback. Now we can do something with our mouse ( if i program it later).
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-  printf("XPOS: %f - YPOS: %f\r", xpos, ypos);
+void mouse_callback(int x, int y) {
+  printf("XPOS: %d - YPOS: %d\r", x, y);
   return;
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-  if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+void mouse_button_callback(int button, int state, int x, int y) {
+  if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
     printf("Right mouse button pressed\r");
-  } else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE) {
+  } else if (button == GLUT_RIGHT_BUTTON && state == GLUT_UP) {
     printf("Right mouse button released\r");
   }
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+void scroll_callback(int button, int dir, int x, int y) {
   return;
 }
 
 // Resize our window.
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void framebuffer_size_callback(int width, int height) {
   glViewport(0, 0, width, height); // TODO: In HDPI can be errors. I try in on MacBook 11.1. And have errors...
 }
 
@@ -142,31 +142,21 @@ void destroy_opencl(Application* application) {
 #endif
 
 Application* init_application(uint32_t width, uint32_t height, char* name) {
-  if (!glfwInit()) {
-    fprintf(stderr, "Failed to initialize GLFW\n");
-    return NULL;
-  }
-
-  // Set OPENGL VERSION.
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, CONTEXT_VERSION_MAJOR);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, CONTEXT_VERSION_MINOR);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  int argc = 1;
+  char* argv[1] = { (char*)"SDFE" };
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_STENCIL);
+  glutInitWindowSize(width, height);
+  glutInitWindowPosition(100, 100);
 
   Application* application = (Application*)malloc(sizeof(Application));
+  application->window = glutCreateWindow(name);
 
-  application->window = glfwCreateWindow(width, height, name, NULL, NULL);
-  if (!application->window) {
-    fprintf(stderr, "Failed to create GLFW window.\n");
-    glfwTerminate();
-    return NULL;
-  }
-
-  glfwMakeContextCurrent(application->window);
-
-  glfwSetFramebufferSizeCallback(application->window, framebuffer_size_callback);
-  glfwSetCursorPosCallback(application->window, mouse_callback);
-  glfwSetScrollCallback(application->window, scroll_callback);
-  glfwSetMouseButtonCallback(application->window, mouse_button_callback);
+  glutDisplayFunc(display_callback);
+  glutReshapeFunc(framebuffer_size_callback);
+  glutPassiveMotionFunc(mouse_callback);
+  glutMouseFunc(mouse_button_callback);
+  glutMotionFunc(mouse_button_callback);
 
   glewExperimental = GL_TRUE;
   if (glewInit() != GLEW_OK) {
@@ -214,15 +204,22 @@ void prepare_to_render(Application* application) {
 }
 
 void event_handler(Application* application) {
-    if (glfwGetKey(application->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(application->window, true);
-
-    if (glfwGetMouseButton(application->window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
-        glfwGetCursorPos(application->window, &application->mouse_x, &application->mouse_y);
+    if (glutGetModifiers() & GLUT_ACTIVE_ALT && glutGetModifiers() & GLUT_ACTIVE_CTRL) {
+        glutLeaveMainLoop();
     }
 
-    if (glfwGetMouseButton(application->window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-      glfwGetCursorPos(application->window, &application->mouse_x, &application->mouse_y);
+    if (glutGetModifiers() & GLUT_ACTIVE_SHIFT) {
+        int x = glutGet(GLUT_WINDOW_X) + glutGet(GLUT_WINDOW_WIDTH) / 2;
+        int y = glutGet(GLUT_WINDOW_Y) + glutGet(GLUT_WINDOW_HEIGHT) / 2;
+        glutWarpPointer(x, y);
+    }
+
+    if (glutGetModifiers() & GLUT_ACTIVE_SHIFT) {
+        glutGetCursorPos(application->mouse_x, application->mouse_y);
+    }
+
+    if (glutGetModifiers() & GLUT_ACTIVE_CTRL) {
+      glutGetCursorPos(application->mouse_x, application->mouse_y);
       printf("Left mouse button pressed at (%f, %f)\n", application->mouse_x, application->mouse_y);
       // Set the selected object ID to -1 to indicate a selection is being made
       application->selected_object_id = -1;
@@ -235,10 +232,10 @@ void event_handler(Application* application) {
     float speed = 0.1f;
 
     // Handle camera movement
-    if (glfwGetKey(application->window, GLFW_KEY_UP) == GLFW_PRESS) {
+    if (glutGetModifiers() & GLUT_ACTIVE_SHIFT && glutGetModifiers() & GLUT_KEY_UP) {
         application->camera_position = vec3_add(application->camera_position, vec3_mul(forward, speed));
     }
-    if (glfwGetKey(application->window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+    if (glutGetModifiers() & GLUT_ACTIVE_SHIFT && glutGetModifiers() & GLUT_KEY_DOWN) {
         application->camera_position = vec3_sub(application->camera_position, vec3_mul(forward, speed));
     }
 }
@@ -248,7 +245,6 @@ void destroy_application(Application* application) {
   destroy_quadfs(application->quad);
   // Do not free application->window_title as it is a string literal
   free(application);
-  glfwTerminate();
 
 #ifdef ENABLE_OPENCL
   destroy_opencl(application);
@@ -277,16 +273,17 @@ void draw(Application* application) {
   glBindVertexArray(0);
 }
 
+void display_callback() {
+  event_handler(application);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+  draw(application);
+  glutSwapBuffers();
+  glutPostRedisplay();
+}
+
 void run_application(Application* application) {
   prepare_to_render(application);
-  while (!glfwWindowShouldClose(application->window))
-  {
-    event_handler(application);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    draw(application);
-    glfwSwapBuffers(application->window);
-    glfwPollEvents();
-  }
+  glutMainLoop();
   destroy_application(application);
   return;
 }
