@@ -1,2 +1,4 @@
-# SDF-Painter.
-Paint some 3D object via SDF.
+## Dependencies
+
+- GLFW3
+- GLEW
