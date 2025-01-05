@@ -9,7 +9,6 @@
       clang
       gcc
       opencl-headers
-
       ocl-icd
     ];
     shellHook = ''
