@@ -24,6 +24,10 @@ def install_opencl_windows():
     subprocess.run(["powershell", "-Command", ".\\intel-gmmlib\\setup.exe /S"])
     print("OpenCL installed on Windows.")
 
+def install_meson_linux():
+    print("Installing meson...")
+    subprocess.run(["sudo", "apt-get", "install", "-y", "meson"])
+
 def install_opencl_macos():
     print("Installing OpenCL on macOS...")
     # macOS typically comes with OpenCL pre-installed, but you can install additional drivers if needed
@@ -46,6 +50,7 @@ def install_glew_glfw3_glm():
         install_glew_glfw3_glm_macos()
     elif os_type == "Linux":
         install_glew_glfw3_glm_linux()
+        install_meson_linux()
     else:
         print(f"Unsupported OS: {os_type}")
 
@@ -82,5 +87,5 @@ def install_vcpkg():
     print("vcpkg installed.")
 
 if __name__ == "__main__":
-    install_opencl()
+    install_opencl_linux()
     install_glew_glfw3_glm()

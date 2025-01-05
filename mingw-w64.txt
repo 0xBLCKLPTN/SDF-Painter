@@ -1,0 +1,16 @@
+[binaries]
+c = '/usr/local/bin/x86_64-w64-mingw32-gcc'
+cpp = '/usr/local/bin/x86_64-w64-mingw32-g++'
+ar = '/usr/local/bin/x86_64-w64-mingw32-ar'
+strip = '/usr/local/bin/x86_64-w64-mingw32-strip'
+pkg-config = '/usr/local/bin/pkg-config'
+exe_wrapper = 'wine'
+
+[properties]
+root = '/usr/local/x86_64-w64-mingw32'
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
