@@ -852,9 +852,9 @@ uniform vec2 u_prevMouse;
 uniform vec3 u_camera_position; // Добавьте позицию камеры
 uniform vec3 u_camera_lookAt;    // Добавьте направление камеры
 
-const float MAX_DIST = 500.0;
+const float MAX_DIST = 100.0;
 const float EPSILON = 0.001;
-const int MAX_STEPS = 256;
+const int MAX_STEPS = 200;
 
 // Creates Plane object with ID 2.0
 vec2 plane(vec3 p) {
@@ -975,7 +975,7 @@ void render(inout vec3 col, in vec2 uv, vec2 mouseDelta) {
     col += getLight(p, rd, material);
 
     // Fog
-    col = mix(col, background, 0.3 - exp(-0.0008 * object.x * object.x));
+    col = mix(col, background, 1.0 - exp(-0.0008 * object.x * object.x));
   } else {
     col += background - max(0.95 * rd.y, 0.0);
   }

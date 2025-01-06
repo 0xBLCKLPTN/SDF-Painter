@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <GL/glew.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 char* read_file(const char* file_path) {
     FILE* file = fopen(file_path, "r");
     if (!file) {
@@ -93,4 +97,14 @@ GLuint create_shader_program(const char* vertexPath, const char* fragmentPath) {
     return shaderProgram;
 }
 
+// I will move content to utils.c file.
+//time_t get_file_modification_time(const char* file_path);
+
+time_t get_file_modification_time(const char* file_path) {
+  struct stat file_stat;
+  if (stat(file_path, &file_stat) == 0) {
+      return file_stat.st_mtime;
+  }
+  return 0;
+}
 #endif // UTILS_H_

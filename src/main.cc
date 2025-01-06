@@ -1,29 +1,44 @@
-/*
-*     Signed Distance Field (SDF) Object Engine.
-*
-* FILENAME: main.c
-* DESCRIPTION: This code is a start point for engine.
-*
-*/
+//
+//     Signed Distance Field (SDF) Object Engine.
+//
+// FILENAME: main.c
+//  DESCRIPTION: This code is a start point for engine.
+//
+//
+// ================== SDF Painter Engine Flags ============
+//    Define ENABLE_GUI via `#define ENABLE_GUI` if you want to enable Engine GUI.
+// this flag enables also enables all IMGUI functional.
+//
+// Define DEBUG via `#define DEBUG` if you want to see printf() result in your stdout.
+// Define ENABLE_VSYNC `#define ENABLE_VSYNC` if you want vertical syncronization.
+// Define EXP_SHADER_ST `#define EXP_SHADER_ST` if you want more OOP on shader.
 #define ENABLE_GUI
+#define DEBUG
+#define ENABLE_VSYNC
+#define EXP_SHADER_ST
+// ========================================================
 
-// Enable it if you want to see printf() result function in our stdout.
-//#define DEBUG
-
+// ================== INCLUDE IMGUI LIBRARIES =============
+//    If ENABLE GUI flag is defined, we include imgui headers file and
+// imgui backends. Now it is a GLFW support and OpenGL. Also, if we want do silence OpenGL,
+// we use `#define GL_SILENCE_DEPRECATION` flag.
 #if defined(ENABLE_GUI)
 #include "../include/imgui/imgui.h"
 #include "../include/imgui/imgui_impl_glfw.h"
 #include "../include/imgui/imgui_impl_opengl3.h"
-
-
 
 #define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
 
-#endif
+#endif // ENABLE_GUI END.
 
+// =================== GLEW AND GLFW =====================
+//  GLEW ( OpenGL Extensios Wrangler Library ) - https://glew.sourceforge.net/
+//  GLFW is an Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan
+// development on the desktop. It provides a simple API for creating windows, contexts and
+// surfaces, receiving input and events. - https://www.glfw.org/
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -55,14 +70,110 @@
 
 #endif
 
-
-// Optional. If defined -> VSYNC Enables
-//#define ENABLE_VSYNC
-
 // Define some constants, like a OpenGL minor and major versions.
 #define CONTEXT_VERSION_MAJOR 3
 #define CONTEXT_VERSION_MINOR 3
 #define RESOURCES_PATH "resources/"
+
+#ifdef EXP_SHADER_ST
+typedef struct {
+  GLuint shader_program;
+  GLuint (*compile_shader_exp)(const char*, GLenum);
+} Shader;
+
+GLuint compile_shader_exp(const char* shader_source, GLenum shader_type, char* error_message) {
+  GLuint shader = glCreateShader(shader_type);
+  glShaderSource(shader, 1, &shader_source, NULL);
+  glCompileShader(shader);
+
+  GLint success;
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+  if (!success) {
+    glGetShaderInfoLog(shader, 512, NULL, error_message);
+#ifdef DEBUG
+    fprintf(stderr, "Failed to compile shader:\n%s\n", error_message);
+#endif
+    glDeleteShader(shader);
+    return 0;
+  }
+  return shader;
+}
+
+Shader* create_shader_program_exp(const char* vertex_path, const char* fragment_path) {
+  Shader* shader = (Shader*)malloc(sizeof(Shader));
+  if (!shader) {
+    fprintf(stderr, "Cannot allocate memory for Shader struct\n");
+    return NULL;
+  }
+
+  char* vertex_code = read_file(vertex_path);
+  char* fragment_code = read_file(fragment_path);
+  if (!vertex_code || !fragment_code) {
+    fprintf(stderr, "Failed to read shader files\n");
+    free(vertex_code);
+    free(fragment_code);
+    free(shader);
+    return NULL;
+  }
+
+  GLuint vertex_shader = 0;
+  GLuint fragment_shader = 0;
+  char error_message[512];
+  int retry_count = 3; // Number of retries
+
+  while (retry_count > 0) {
+    vertex_shader = compile_shader_exp(vertex_code, GL_VERTEX_SHADER, error_message);
+    fragment_shader = compile_shader_exp(fragment_code, GL_FRAGMENT_SHADER, error_message);
+
+    if (vertex_shader && fragment_shader) {
+      break;
+    }
+
+    retry_count--;
+    if (retry_count > 0) {
+#ifdef DEBUG
+      fprintf(stderr, "Retrying to compile shaders...\n");
+#endif
+    }
+  }
+
+  free(vertex_code);
+  free(fragment_code);
+
+  if (!vertex_shader || !fragment_shader) {
+#ifdef DEBUG
+    fprintf(stderr, "Failed to compile shaders after retries\n");
+#endif
+    free(shader);
+    return NULL;
+  }
+
+  GLuint shader_program = glCreateProgram();
+  glAttachShader(shader_program, vertex_shader);
+  glAttachShader(shader_program, fragment_shader);
+  glLinkProgram(shader_program);
+
+  GLint success;
+  glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
+  if (!success) {
+    glGetProgramInfoLog(shader_program, 512, NULL, error_message);
+#ifdef DEBUG
+    fprintf(stderr, "Failed to link shader program:\n%s\n", error_message);
+#endif
+    glDeleteProgram(shader_program);
+    free(shader);
+    return NULL;
+  }
+
+  glDeleteShader(vertex_shader);
+  glDeleteShader(fragment_shader);
+
+  shader->shader_program = shader_program;
+  return shader;
+}
+
+
+#endif // EXP_SHADER_ST
 
 
 //    C struct (o-yeea. this is a class in C language) for store some
@@ -72,11 +183,15 @@ typedef struct {
   int width, height;
   char* window_title;
   GLFWwindow* window;
+#ifdef EXP_SHADER_ST
+  Shader* default_shader_program;
+#else
   GLuint default_shader_program;
+#endif  
   QuadFS* quad; // Add a pointer to the QuadFS struct
   double mouse_x, mouse_y;
-  vec3 camera_position; // Добавьте позицию камеры
-  vec3 camera_lookAt;   // Добавьте направление камеры
+  vec3 camera_position;
+  vec3 camera_lookAt;
   int selected_object_id;
 
 #ifdef ENABLE_GUI
@@ -84,14 +199,6 @@ typedef struct {
 #endif
 
 } Application;
-
-time_t get_file_modification_time(const char* file_path) {
-  struct stat file_stat;
-  if (stat(file_path, &file_stat) == 0) {
-      return file_stat.st_mtime;
-  }
-  return 0;
-}
 
 // Resize our window.
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -182,14 +289,15 @@ Application* init_application(int width, int height, char* name) {
   application->camera_position = (vec3){-20.0f, 0.0f, -3.0f}; // Инициализируйте позицию камеры
   application->camera_lookAt = (vec3){20.0f, 0.0f, 0.0f};     // Инициализируйте направление камеры
   application->selected_object_id = -1;
+
 #ifdef ENABLE_GUI
   application->enable_gui = true;
 #else
   application->enable_gui = false;
 #endif
+
   return application;
 }
-
 void prepare_to_render(Application* application) {
     // Allocate enough memory to hold the concatenated strings
     char vertexShaderPath[strlen(RESOURCES_PATH) + strlen("vertex_shader.glsl") + 1];
@@ -199,13 +307,22 @@ void prepare_to_render(Application* application) {
     sprintf(vertexShaderPath, "%s%s", RESOURCES_PATH, "vertex_shader.glsl");
     sprintf(fragmentShaderPath, "%s%s", RESOURCES_PATH, "fragment_shader.glsl");
 
+#ifdef EXP_SHADER_ST
+    application->default_shader_program = create_shader_program_exp(vertexShaderPath, fragmentShaderPath);
+    if (!application->default_shader_program || !application->default_shader_program->shader_program) {
+        fprintf(stderr, "Failed to create shader program.\n");
+        free(application);
+    }
+#else
     application->default_shader_program = create_shader_program(vertexShaderPath, fragmentShaderPath);
     if (!application->default_shader_program) {
         fprintf(stderr, "Failed to create shader program.\n");
         free(application);
     }
+#endif
     application->quad = quad_fs();
 }
+
 
 
 void event_handler(Application* application) {
@@ -241,7 +358,11 @@ void event_handler(Application* application) {
 }
 
 void destroy_application(Application* application) {
+#ifdef EXP_SHADER_ST
+  glDeleteProgram(application->default_shader_program->shader_program);
+#else
   glDeleteProgram(application->default_shader_program);
+#endif
   destroy_quadfs(application->quad);
   // Do not free application->window_title as it is a string literal
   free(application);
@@ -254,6 +375,24 @@ void draw(Application* application) {
     glfwGetFramebufferSize(application->window, &fbWidth, &fbHeight);
 
 
+#ifdef EXP_SHADER_ST
+    glUseProgram(application->default_shader_program->shader_program);
+    GLint resolution_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_resolution");
+    glUniform2f(resolution_location, fbWidth, fbHeight);
+    
+    GLuint mouse_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_mouse");
+    glUniform2f(mouse_location, application->mouse_x, application->mouse_y);
+    
+    GLuint camera_position_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_camera_position");
+    glUniform3f(camera_position_location, application->camera_position.x, application->camera_position.y, application->camera_position.z);
+
+    GLuint camera_lookat_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_camera_lookAt");
+    glUniform3f(camera_lookat_location, application->camera_lookAt.x, application->camera_lookAt.y, application->camera_lookAt.z);
+
+    GLuint selected_object_id_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_selected_object_id");
+    glUniform1i(selected_object_id_location, application->selected_object_id);
+    
+#else
     glUseProgram(application->default_shader_program);
     GLint resolutionLocation = glGetUniformLocation(application->default_shader_program, "u_resolution");
     glUniform2f(resolutionLocation, fbWidth, fbHeight);
@@ -269,7 +408,7 @@ void draw(Application* application) {
 
     GLuint selectedObjectIdLocation = glGetUniformLocation(application->default_shader_program, "u_selected_object_id");
     glUniform1i(selectedObjectIdLocation, application->selected_object_id);
-
+#endif
     glBindVertexArray(application->quad->VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
@@ -291,6 +430,7 @@ void run_application(Application* application) {
             continue;
         }
 #ifdef ENABLE_GUI
+      
         ImGuiViewport* viewport = ImGui::GetMainViewport();
         // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
@@ -329,7 +469,11 @@ void run_application(Application* application) {
         time_t current_mod_time = get_file_modification_time("resources/fragment_shader.glsl");
         if (current_mod_time != last_mod_time) {
             last_mod_time = current_mod_time;
+#ifdef EXP_SHADER_ST
+            glDeleteProgram(application->default_shader_program->shader_program);
+#else
             glDeleteProgram(application->default_shader_program);
+#endif
             prepare_to_render(application);
         }
 
