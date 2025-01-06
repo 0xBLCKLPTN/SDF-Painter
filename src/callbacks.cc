@@ -28,8 +28,5 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
   return;
 }
 
-// Resize our window.
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-  glViewport(0, 0, width, height); // TODO: In HDPI can be errors. I try in on MacBook 11.1. And have errors...
-}
+
 

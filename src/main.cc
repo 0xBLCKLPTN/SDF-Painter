@@ -11,9 +11,9 @@
 //#define DEBUG
 
 #if defined(ENABLE_GUI)
-#include "../include/cimgui/imgui/imgui.h"
-#include "../include/cimgui/imgui/backends/imgui_impl_glfw.h"
-#include "../include/cimgui/imgui/backends/imgui_impl_opengl3.h"
+#include "../include/imgui/imgui.h"
+#include "../include/imgui/imgui_impl_glfw.h"
+#include "../include/imgui/imgui_impl_opengl3.h"
 
 
 
@@ -41,6 +41,9 @@
 #include "../include/components.h"
 #include "../include/callbacks.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #if defined(ENABLE_GUI)
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
@@ -66,7 +69,7 @@
 // application data, like a window sizes or something else.
 typedef struct {
   vec2_uint32_t sizes;
-  uint32_t width, height;
+  int width, height;
   char* window_title;
   GLFWwindow* window;
   GLuint default_shader_program;
@@ -82,10 +85,24 @@ typedef struct {
 
 } Application;
 
+time_t get_file_modification_time(const char* file_path) {
+  struct stat file_stat;
+  if (stat(file_path, &file_stat) == 0) {
+      return file_stat.st_mtime;
+  }
+  return 0;
+}
+
+// Resize our window.
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+#ifdef DEBUG
+  printf("FSC: %d-%d\n", width, height);
+#endif
+  glViewport(0, 0, width, height); // TODO: In HDPI can be errors. I try in on MacBook 11.1. And have errors...
+}
 
 
-
-Application* init_application(uint32_t width, uint32_t height, char* name) {
+Application* init_application(int width, int height, char* name) {
   if (!glfwInit()) {
     fprintf(stderr, "Failed to initialize GLFW\n");
     return NULL;
@@ -150,12 +167,14 @@ Application* init_application(uint32_t width, uint32_t height, char* name) {
     return NULL;
   }
 
-  glViewport(0, 0, width, height);
+  
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
   glEnable(GL_STENCIL_TEST);
   glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+  glViewport(0, 0, width, height);
+  
 
   application->width = width;
   application->height = height;
@@ -187,6 +206,7 @@ void prepare_to_render(Application* application) {
     }
     application->quad = quad_fs();
 }
+
 
 void event_handler(Application* application) {
     if (glfwGetKey(application->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -226,97 +246,110 @@ void destroy_application(Application* application) {
   // Do not free application->window_title as it is a string literal
   free(application);
   glfwTerminate();
-
 }
+
 
 void draw(Application* application) {
-  glUseProgram(application->default_shader_program);
-  GLint resolutionLocation = glGetUniformLocation(application->default_shader_program, "u_resolution");
-  glUniform2f(resolutionLocation, application->width, application->height);
+    int fbWidth, fbHeight;
+    glfwGetFramebufferSize(application->window, &fbWidth, &fbHeight);
 
-  GLuint mouseLocation = glGetUniformLocation(application->default_shader_program, "u_mouse");
-  glUniform2f(mouseLocation, application->mouse_x, application->mouse_y);
 
-  GLuint cameraPositionLocation = glGetUniformLocation(application->default_shader_program, "u_camera_position");
-  glUniform3f(cameraPositionLocation, application->camera_position.x, application->camera_position.y, application->camera_position.z);
+    glUseProgram(application->default_shader_program);
+    GLint resolutionLocation = glGetUniformLocation(application->default_shader_program, "u_resolution");
+    glUniform2f(resolutionLocation, fbWidth, fbHeight);
 
-  GLuint cameraLookAtLocation = glGetUniformLocation(application->default_shader_program, "u_camera_lookAt");
-  glUniform3f(cameraLookAtLocation, application->camera_lookAt.x, application->camera_lookAt.y, application->camera_lookAt.z);
+    GLuint mouseLocation = glGetUniformLocation(application->default_shader_program, "u_mouse");
+    glUniform2f(mouseLocation, application->mouse_x, application->mouse_y);
 
-  GLuint selectedObjectIdLocation = glGetUniformLocation(application->default_shader_program, "u_selected_object_id");
-  glUniform1i(selectedObjectIdLocation, application->selected_object_id);
+    GLuint cameraPositionLocation = glGetUniformLocation(application->default_shader_program, "u_camera_position");
+    glUniform3f(cameraPositionLocation, application->camera_position.x, application->camera_position.y, application->camera_position.z);
 
-  glBindVertexArray(application->quad->VAO);
-  glDrawArrays(GL_TRIANGLES, 0, 6);
-  glBindVertexArray(0);
+    GLuint cameraLookAtLocation = glGetUniformLocation(application->default_shader_program, "u_camera_lookAt");
+    glUniform3f(cameraLookAtLocation, application->camera_lookAt.x, application->camera_lookAt.y, application->camera_lookAt.z);
+
+    GLuint selectedObjectIdLocation = glGetUniformLocation(application->default_shader_program, "u_selected_object_id");
+    glUniform1i(selectedObjectIdLocation, application->selected_object_id);
+
+    glBindVertexArray(application->quad->VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindVertexArray(0);
 }
+
 
 void run_application(Application* application) {
-  prepare_to_render(application);
+    prepare_to_render(application);
 
-  while (!glfwWindowShouldClose(application->window))
-  {
-    glfwPollEvents();
-    if (glfwGetWindowAttrib(application->window, GLFW_ICONIFIED) != 0)
-      {
-          ImGui_ImplGlfw_Sleep(10);
-          continue;
-      }
+    time_t last_mod_time = get_file_modification_time("resources/fragment_shader.glsl");
+
+    while (!glfwWindowShouldClose(application->window)) {
+        glfwPollEvents();
+#ifdef DEBUG
+        printf("SCREEN SIZE: %i - %i\n", application->width, application->height);
+#endif
+        if (glfwGetWindowAttrib(application->window, GLFW_ICONIFIED) != 0) {
+            ImGui_ImplGlfw_Sleep(10);
+            continue;
+        }
 #ifdef ENABLE_GUI
-    ImGuiViewport* viewport = ImGui::GetMainViewport();
-    // Start the Dear ImGui frame
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
-    ImGui::SetNextWindowSize(viewport->Size, ImGuiCond_Always);
-    ImGui::SetNextWindowPos(ImVec2(0, 0));
-    // Show IMGUI demo
+        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::SetNextWindowSize(viewport->Size, ImGuiCond_Always);
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        // Show IMGUI demo
 
-    // Create the menu bar
-    if (ImGui::BeginMainMenuBar())
-    {
-        if (ImGui::BeginMenu("File"))
-        {
-            if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Close", "Ctrl+W")) { application->enable_gui = false; }
-            if (ImGui::MenuItem("Exit", "Ctrl+Q")) { glfwSetWindowShouldClose(application->window, GLFW_TRUE); }
-            ImGui::EndMenu();
+        // Create the menu bar
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("File")) {
+                if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
+                if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
+                if (ImGui::MenuItem("Close", "Ctrl+W")) { application->enable_gui = false; }
+                if (ImGui::MenuItem("Exit", "Ctrl+Q")) { glfwSetWindowShouldClose(application->window, GLFW_TRUE); }
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Edit")) {
+                if (ImGui::MenuItem("Undo", "Ctrl+Z")) { /* Do stuff */ }
+                if (ImGui::MenuItem("Redo", "Ctrl+Y", false, false)) { /* Do stuff */ }  // Disabled item
+                ImGui::Separator();
+                if (ImGui::MenuItem("Cut", "Ctrl+X")) { /* Do stuff */ }
+                if (ImGui::MenuItem("Copy", "Ctrl+C")) { /* Do stuff */ }
+                if (ImGui::MenuItem("Paste", "Ctrl+V")) { /* Do stuff */ }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
         }
-        if (ImGui::BeginMenu("Edit"))
-        {
-            if (ImGui::MenuItem("Undo", "Ctrl+Z")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Redo", "Ctrl+Y", false, false)) { /* Do stuff */ }  // Disabled item
-            ImGui::Separator();
-            if (ImGui::MenuItem("Cut", "Ctrl+X")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Copy", "Ctrl+C")) { /* Do stuff */ }
-            if (ImGui::MenuItem("Paste", "Ctrl+V")) { /* Do stuff */ }
-            ImGui::EndMenu();
+
+        ImGui::Render();
+#endif
+        event_handler(application);
+
+        // Check for shader file changes
+        time_t current_mod_time = get_file_modification_time("resources/fragment_shader.glsl");
+        if (current_mod_time != last_mod_time) {
+            last_mod_time = current_mod_time;
+            glDeleteProgram(application->default_shader_program);
+            prepare_to_render(application);
         }
-        ImGui::EndMainMenuBar();
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        draw(application);
+#ifdef ENABLE_GUI
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+#endif
+        glfwSwapBuffers(application->window);
     }
-    
-            
-    ImGui::Render();
-#endif
-    event_handler(application);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    draw(application);
 #ifdef ENABLE_GUI
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
 #endif
-    glfwSwapBuffers(application->window);
-    
-  }
-#ifdef ENABLE_GUI
-  ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplGlfw_Shutdown();
-#endif
-  ImGui::DestroyContext();
+    ImGui::DestroyContext();
 
-  destroy_application(application);
-  return;
+    destroy_application(application);
+    return;
 }
+
 
 int main(int argc, char* argv[]) {
   Application* application = init_application(800, 600, "SDFE");

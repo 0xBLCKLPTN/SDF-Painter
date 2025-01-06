@@ -14,24 +14,20 @@ sources = [
   'src/main.cc',
   'src/quad_fs.cc',
   'src/callbacks.cc',
-  'include/cimgui/cimgui.cpp',
-  'include/cimgui/imgui/imgui.cpp',
-  'include/cimgui/imgui/imgui_draw.cpp',
-  'include/cimgui/imgui/imgui_tables.cpp',
-  'include/cimgui/imgui/imgui_widgets.cpp',
-  'include/cimgui/imgui/backends/imgui_impl_glfw.cpp',
-  'include/cimgui/imgui/backends/imgui_impl_opengl3.cpp',
-  'include/cimgui/imgui/imgui_demo.cpp',
+  'include/imgui/imgui.cpp',
+  'include/imgui/imgui_draw.cpp',
+  'include/imgui/imgui_tables.cpp',
+  'include/imgui/imgui_widgets.cpp',
+  'include/imgui/imgui_impl_glfw.cpp',
+  'include/imgui/imgui_impl_opengl3.cpp',
+  'include/imgui/imgui_demo.cpp',
 ]
 
 # Include directories
 include_dirs = [
   'src',
   'include',
-  'include/cimgui/imgui/backends',
-  'include/cimgui',
-  'include/cimgui/imgui',
-  'include/cimgui/generator/output'
+  'include/imgui',
 ]
 
 # Create the executable

@@ -975,7 +975,7 @@ void render(inout vec3 col, in vec2 uv, vec2 mouseDelta) {
     col += getLight(p, rd, material);
 
     // Fog
-    col = mix(col, background, 0.9 - exp(-0.0008 * object.x * object.x));
+    col = mix(col, background, 0.3 - exp(-0.0008 * object.x * object.x));
   } else {
     col += background - max(0.95 * rd.y, 0.0);
   }
