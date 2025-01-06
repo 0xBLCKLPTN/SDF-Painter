@@ -5,6 +5,25 @@
 * DESCRIPTION: This code is a start point for engine.
 *
 */
+#define ENABLE_GUI
+
+// Enable it if you want to see printf() result function in our stdout.
+//#define DEBUG
+
+#if defined(ENABLE_GUI)
+#include "../include/cimgui/imgui/imgui.h"
+#include "../include/cimgui/imgui/backends/imgui_impl_glfw.h"
+#include "../include/cimgui/imgui/backends/imgui_impl_opengl3.h"
+
+
+
+#define GL_SILENCE_DEPRECATION
+#if defined(IMGUI_IMPL_OPENGL_ES2)
+#include <GLES2/gl2.h>
+#endif
+
+#endif
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -22,17 +41,20 @@
 #include "../include/components.h"
 #include "../include/callbacks.h"
 
-#define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
-#include "../include/cimgui/cimgui.h"
 
-#ifndef IMGUI_HAS_IMSTR
-#define igBegin igBegin_Str
-#define igSliderFloat igSliderFloat_Str
-#define igCheckbox igCheckbox_Str
-#define igColorEdit3 igColorEdit3_Str
-#define igButton igButton_Str
+#if defined(ENABLE_GUI)
+// [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
+// To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
+// Your own project should not be affected, as you are likely to link with a newer binary of GLFW that is adequate for your version of Visual Studio.
+#if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
+#endif
+
+
+// Optional. If defined -> VSYNC Enables
+//#define ENABLE_VSYNC
 
 // Define some constants, like a OpenGL minor and major versions.
 #define CONTEXT_VERSION_MAJOR 3
@@ -54,7 +76,12 @@ typedef struct {
   vec3 camera_lookAt;   // Добавьте направление камеры
   int selected_object_id;
 
+#ifdef ENABLE_GUI
+  bool enable_gui;
+#endif
+
 } Application;
+
 
 
 
@@ -63,7 +90,15 @@ Application* init_application(uint32_t width, uint32_t height, char* name) {
     fprintf(stderr, "Failed to initialize GLFW\n");
     return NULL;
   }
-
+  IMGUI_CHECKVERSION();
+  
+#if __APPLE__
+  // GL 3.2 Core + GLSL 150
+  const char *glsl_version = "#version 330";
+#else
+  // GL 3.2 + GLSL 130
+  const char *glsl_version = "#version 330";
+#endif
   // Set OPENGL VERSION.
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, CONTEXT_VERSION_MAJOR);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, CONTEXT_VERSION_MINOR);
@@ -80,10 +115,33 @@ Application* init_application(uint32_t width, uint32_t height, char* name) {
 
   glfwMakeContextCurrent(application->window);
 
+#ifdef ENABLE_VSYNC
+  glfwSwapInterval(1);
+#endif
+
+
   glfwSetFramebufferSizeCallback(application->window, framebuffer_size_callback);
   glfwSetCursorPosCallback(application->window, mouse_callback);
   glfwSetScrollCallback(application->window, scroll_callback);
   glfwSetMouseButtonCallback(application->window, mouse_button_callback);
+
+#ifdef ENABLE_GUI
+  // Setup CIMGUI
+  ImGui::CreateContext();
+  ImGuiIO& io = ImGui::GetIO(); (void)io;
+ 
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls.
+
+#ifdef IMGUI_HASH_DOCK
+  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable docking.
+  io.COnfigFlags |= ImGuiConfigFlags_ViewportsEnable // Enable Multi-Viewport / Platform Winwdows;
+#endif
+
+  ImGui::StyleColorsDark();
+  
+  ImGui_ImplGlfw_InitForOpenGL(application->window, true);
+  ImGui_ImplOpenGL3_Init(glsl_version);
+#endif
 
   glewExperimental = GL_TRUE;
   if (glewInit() != GLEW_OK) {
@@ -105,7 +163,11 @@ Application* init_application(uint32_t width, uint32_t height, char* name) {
   application->camera_position = (vec3){-20.0f, 0.0f, -3.0f}; // Инициализируйте позицию камеры
   application->camera_lookAt = (vec3){20.0f, 0.0f, 0.0f};     // Инициализируйте направление камеры
   application->selected_object_id = -1;
-
+#ifdef ENABLE_GUI
+  application->enable_gui = true;
+#else
+  application->enable_gui = false;
+#endif
   return application;
 }
 
@@ -136,7 +198,9 @@ void event_handler(Application* application) {
 
     if (glfwGetMouseButton(application->window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
       glfwGetCursorPos(application->window, &application->mouse_x, &application->mouse_y);
+#ifdef DEBUG
       printf("Left mouse button pressed at (%f, %f)\n", application->mouse_x, application->mouse_y);
+#endif
       // Set the selected object ID to -1 to indicate a selection is being made
       application->selected_object_id = -1;
     }
@@ -189,14 +253,67 @@ void draw(Application* application) {
 
 void run_application(Application* application) {
   prepare_to_render(application);
+
   while (!glfwWindowShouldClose(application->window))
   {
+    glfwPollEvents();
+    if (glfwGetWindowAttrib(application->window, GLFW_ICONIFIED) != 0)
+      {
+          ImGui_ImplGlfw_Sleep(10);
+          continue;
+      }
+#ifdef ENABLE_GUI
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    // Start the Dear ImGui frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    ImGui::SetNextWindowSize(viewport->Size, ImGuiCond_Always);
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
+    // Show IMGUI demo
+
+    // Create the menu bar
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("File"))
+        {
+            if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Close", "Ctrl+W")) { application->enable_gui = false; }
+            if (ImGui::MenuItem("Exit", "Ctrl+Q")) { glfwSetWindowShouldClose(application->window, GLFW_TRUE); }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Edit"))
+        {
+            if (ImGui::MenuItem("Undo", "Ctrl+Z")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Redo", "Ctrl+Y", false, false)) { /* Do stuff */ }  // Disabled item
+            ImGui::Separator();
+            if (ImGui::MenuItem("Cut", "Ctrl+X")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Copy", "Ctrl+C")) { /* Do stuff */ }
+            if (ImGui::MenuItem("Paste", "Ctrl+V")) { /* Do stuff */ }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
+    
+            
+    ImGui::Render();
+#endif
     event_handler(application);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     draw(application);
+#ifdef ENABLE_GUI
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+#endif
     glfwSwapBuffers(application->window);
-    glfwPollEvents();
+    
   }
+#ifdef ENABLE_GUI
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplGlfw_Shutdown();
+#endif
+  ImGui::DestroyContext();
+
   destroy_application(application);
   return;
 }

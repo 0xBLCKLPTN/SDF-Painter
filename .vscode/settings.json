@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "imgui_impl_opengl3.h": "c",
+        "imgui_impl_glfw.h": "c"
+    }
+}
