@@ -374,15 +374,14 @@ void draw(Application* application) {
     int fbWidth, fbHeight;
     glfwGetFramebufferSize(application->window, &fbWidth, &fbHeight);
 
-
 #ifdef EXP_SHADER_ST
     glUseProgram(application->default_shader_program->shader_program);
     GLint resolution_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_resolution");
     glUniform2f(resolution_location, fbWidth, fbHeight);
-    
+
     GLuint mouse_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_mouse");
     glUniform2f(mouse_location, application->mouse_x, application->mouse_y);
-    
+
     GLuint camera_position_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_camera_position");
     glUniform3f(camera_position_location, application->camera_position.x, application->camera_position.y, application->camera_position.z);
 
@@ -391,7 +390,12 @@ void draw(Application* application) {
 
     GLuint selected_object_id_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_selected_object_id");
     glUniform1i(selected_object_id_location, application->selected_object_id);
-    
+
+    // Set the u_time uniform
+    GLuint time_location = glGetUniformLocation(application->default_shader_program->shader_program, "u_time");
+    float time = glfwGetTime();
+    glUniform1f(time_location, time);
+
 #else
     glUseProgram(application->default_shader_program);
     GLint resolutionLocation = glGetUniformLocation(application->default_shader_program, "u_resolution");
@@ -408,11 +412,18 @@ void draw(Application* application) {
 
     GLuint selectedObjectIdLocation = glGetUniformLocation(application->default_shader_program, "u_selected_object_id");
     glUniform1i(selectedObjectIdLocation, application->selected_object_id);
+
+    // Set the u_time uniform
+    GLuint timeLocation = glGetUniformLocation(application->default_shader_program, "u_time");
+    float time = glfwGetTime();
+    glUniform1f(timeLocation, time);
 #endif
+
     glBindVertexArray(application->quad->VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }
+
 
 
 void run_application(Application* application) {

@@ -849,40 +849,60 @@ out vec4 fragColor;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform vec2 u_prevMouse;
-uniform vec3 u_camera_position; // Добавьте позицию камеры
-uniform vec3 u_camera_lookAt;    // Добавьте направление камеры
+uniform vec3 u_camera_position;
+uniform vec3 u_camera_lookAt;
+uniform float u_time;
 
 const float MAX_DIST = 100.0;
 const float EPSILON = 0.001;
 const int MAX_STEPS = 200;
 
-// Creates Plane object with ID 2.0
+float fDisplace(vec3 p) {
+  pR(p.yz, sin(2.0 * u_time));
+  return (sin(p.x + 4.0 * u_time) * sin(p.y + sin(2.0 * u_time)) * sin(p.z + 6.0 * u_time));
+}
+
+float smin(float a, float b, float k) {
+  float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
+  return mix(b, a, h) - k * h * (1.0 - h);
+}
+
 vec2 plane(vec3 p) {
   float planeDist = fPlane(p, vec3(0, 1, 0), 1.0);
   float planeID = 2.0;
   return vec2(planeDist, planeID);
 }
 
-// Creates Sphere object with ID 1.0
+vec2 cube(vec3 p) {
+  float cubeDist = fBox(p, vec3(1.0));
+  float cubeID = 1.0;
+  return vec2(cubeDist, cubeID);
+}
+
 vec2 sphere(vec3 p) {
-  float sphereDist = fSphere(p, 1.0);
+  vec3 startPos = vec3(0.0, 0.0, -2.0);
+  vec3 endPos = vec3(0.0, 0.0, 2.0);
+  vec3 spherePos = mix(startPos, endPos, 0.5 * (1.0 + sin(u_time)));
+  p -= spherePos;
+  float sphereDist = fSphere(p, 1.0 + fDisplace(p));
   float sphereID = 1.0;
   return vec2(sphereDist, sphereID);
 }
 
 vec2 map(vec3 p) {
-  vec2 sphere = sphere(p);
-  vec2 plane = plane(p);
-
-  vec2 res;
-  res = fOpUnionID(sphere, plane);
+  vec2 sphereDist = sphere(p);
+  vec2 cubeDist = cube(p);
+  vec2 planeDist = plane(p);
+  float blendDist = smin(sphereDist.x, cubeDist.x, 0.5);
+  float blendID = mix(sphereDist.y, cubeDist.y, 0.5 + 0.5 * (cubeDist.x - sphereDist.x) / 0.5);
+  vec2 res = vec2(blendDist, blendID);
+  res = fOpUnionID(res, planeDist);
   return res;
 }
 
 vec2 rayMarch(vec3 ro, vec3 rd) {
   float dist = 0.0;
   vec2 hit;
-
   for (int i = 0; i < MAX_STEPS; i++) {
     vec3 p = ro + dist * rd;
     hit = map(p);
@@ -898,13 +918,45 @@ vec3 getNormal(vec3 p) {
   return normalize(n);
 }
 
+// Function to find the minimum value between a float and each component of a vec3
+float min(float a, vec3 b) {
+    return min(min(min(a, b.x), min(a, b.y)), min(a, b.z));
+}
+
+float getAmbientOcclusion(vec3 p, vec3 normal) {
+    float occ = 0.0;
+    float weight = 1.0;
+    for (int i = 0; i < 8; i++) {
+        float len = 0.01 + 0.02 * float(i * i);
+        float dist = map(p + normal * len).x;
+        occ += (len - dist) * weight;
+        weight *= 0.85;
+    }
+    return 1.0 - clamp(0.6 * occ, 0.0, 1.0);
+}
+
+float getSoftShadow(vec3 p, vec3 lightPos) {
+    float res = 1.0;
+    float dist = 0.001;
+    float lightSize = 0.03;
+    for (int i = 0; i < MAX_STEPS; i++) {
+        float hit = map(p + lightPos * dist).x;
+        res = min(res, hit / (dist * lightSize));
+        dist += hit;
+        if (hit < 0.0001 || dist > 60.0) break;
+    }
+    return clamp(res, 0.0, 1.0);
+}
+
+
+
+
 vec3 getLight(vec3 p, vec3 rd, vec3 color) {
   vec3 lightPos = vec3(20.0, 40.0, -30.0);
   vec3 L = normalize(lightPos - p);
   vec3 N = getNormal(p);
   vec3 V = -rd;
   vec3 R = reflect(-L, N);
-
   vec3 specColor = vec3(0.5);
   vec3 specular = specColor * pow(clamp(dot(R, V), 0.0, 1.0), 10.0);
   vec3 diffuse = color * clamp(dot(L, N), 0.0, 1.0);
@@ -912,17 +964,26 @@ vec3 getLight(vec3 p, vec3 rd, vec3 color) {
   vec3 fresnel = 0.25 * color * pow(1.0 + dot(rd, N), 3.0);
 
   // Shadows
-  float d = rayMarch(p + N * 0.02, normalize(lightPos)).x;
+  float shadow = getSoftShadow(p + N * 0.02, normalize(lightPos));
 
-  if (d < length(lightPos - p)) return ambient + fresnel;
-  return diffuse + ambient + specular + fresnel;
+  float occ = getAmbientOcclusion(p, N);
+
+  vec3 back = 0.05 * color * clamp(dot(N, -L), 0.0, 1.0);
+  
+  return  (back + ambient + fresnel) * occ + (specular * occ + diffuse) * shadow;
 }
 
 vec3 getMaterial(vec3 p, float id) {
   vec3 m;
   switch (int(id)) {
     case 1: m = vec3(0.9, 0.9, 0.0); break;
-    case 2: m = vec3(0.2 + 0.4 * mod(floor(p.x) + floor(p.z), 2.0)); break;
+    case 2:
+      if (mod(floor(p.x) + floor(p.z), 2.0) == 0.0) {
+        m = vec3(0.686, 1.0, 0.365);
+      } else {
+        m = vec3(0.118, 0.565, 0.451);
+      } break;
+	case 3: m = vec3(0.9, 0.9, 0.0); break;
   }
   return m;
 }
@@ -938,24 +999,18 @@ void mouseControl(inout vec3 ro, inout vec3 lookAt, vec2 mouseDelta) {
   vec3 forward = normalize(lookAt - ro);
   vec3 right = normalize(cross(vec3(0, 1, 0), forward));
   vec3 up = cross(forward, right);
-
-  // Rotate around the up axis
   float angleY = mouseDelta.x * 2.0 * 3.14159;
   mat3 rotY = mat3(
     cos(angleY), 0, sin(angleY),
     0, 1, 0,
     -sin(angleY), 0, cos(angleY)
   );
-
-  // Rotate around the right axis
   float angleX = mouseDelta.y * 3.14159;
   mat3 rotX = mat3(
     1, 0, 0,
     0, cos(angleX), -sin(angleX),
     0, sin(angleX), cos(angleX)
   );
-
-  // Apply rotations
   forward = rotY * rotX * forward;
   lookAt = ro + forward;
 }
@@ -965,34 +1020,53 @@ void render(inout vec3 col, in vec2 uv, vec2 mouseDelta) {
   vec3 lookAt = u_camera_lookAt;
   mouseControl(ro, lookAt, mouseDelta);
   vec3 rd = getCam(ro, lookAt) * normalize(vec3(uv, 1.0));
-
   vec2 object = rayMarch(ro, rd);
   vec3 background = vec3(0.5, 0.8, 0.9);
-
   if (object.x < MAX_DIST) {
     vec3 p = ro + object.x * rd;
     vec3 material = getMaterial(p, object.y);
     col += getLight(p, rd, material);
-
-    // Fog
     col = mix(col, background, 1.0 - exp(-0.0008 * object.x * object.x));
   } else {
     col += background - max(0.95 * rd.y, 0.0);
   }
 }
 
+#if defined(AAx4)
+#define AA_LEVEL 4
+#elif defined(AAx2)
+#define AA_LEVEL 2
+#else
+#define AA_LEVEL 1
+#endif
+
 void main() {
-  // Normalize the fragment coordinates to the range [-1, 1]
   vec2 uv = (2.0 * gl_FragCoord.xy - u_resolution.xy) / u_resolution.y;
   vec3 col = vec3(0.0);
-
-  // Calculate mouse delta
   vec2 mouseDelta = (u_mouse - u_prevMouse) / u_resolution;
 
-  render(col, uv, mouseDelta);
+  // Anti-Aliasing
+#if defined(AAx4) || defined(AAx2)
+  vec2 offsets[AA_LEVEL * AA_LEVEL];
+  int index = 0;
+  for (int y = 0; y < AA_LEVEL; y++) {
+    for (int x = 0; x < AA_LEVEL; x++) {
+      offsets[index++] = vec2(float(x) / float(AA_LEVEL) - 0.5, float(y) / float(AA_LEVEL) - 0.5);
+    }
+  }
 
+  for (int i = 0; i < AA_LEVEL * AA_LEVEL; i++) {
+    vec3 tempCol = vec3(0.0);
+    render(tempCol, uv + offsets[i] / u_resolution, mouseDelta);
+    col += tempCol;
+  }
+  col /= float(AA_LEVEL * AA_LEVEL);
+#else
+  render(col, uv, mouseDelta);
+#endif
   // Enable gamma correction.
   col = pow(col, vec3(0.4545));
 
   fragColor = vec4(col, 1.0);
 }
+
