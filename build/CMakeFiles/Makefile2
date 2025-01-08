@@ -85,12 +85,12 @@ clean: CMakeFiles/sdfe.dir/clean
 CMakeFiles/sdfe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target sdfe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 "Built target sdfe"
 .PHONY : CMakeFiles/sdfe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdfe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles 14
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sdfe.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles 0
 .PHONY : CMakeFiles/sdfe.dir/rule

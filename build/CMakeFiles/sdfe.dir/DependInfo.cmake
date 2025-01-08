@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_tables.cpp" "CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o" "gcc" "CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o.d"
   "/Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_widgets.cpp" "CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o" "gcc" "CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o.d"
   "/Users/twofacedjanus/Desktop/SDF-Painter/src/advanced_math.cc" "CMakeFiles/sdfe.dir/src/advanced_math.cc.o" "gcc" "CMakeFiles/sdfe.dir/src/advanced_math.cc.o.d"
+  "/Users/twofacedjanus/Desktop/SDF-Painter/src/application.cc" "CMakeFiles/sdfe.dir/src/application.cc.o" "gcc" "CMakeFiles/sdfe.dir/src/application.cc.o.d"
   "/Users/twofacedjanus/Desktop/SDF-Painter/src/callbacks.cc" "CMakeFiles/sdfe.dir/src/callbacks.cc.o" "gcc" "CMakeFiles/sdfe.dir/src/callbacks.cc.o.d"
   "/Users/twofacedjanus/Desktop/SDF-Painter/src/quad_fs.cc" "CMakeFiles/sdfe.dir/src/quad_fs.cc.o" "gcc" "CMakeFiles/sdfe.dir/src/quad_fs.cc.o.d"
   "/Users/twofacedjanus/Desktop/SDF-Painter/src/sdf_engine_core.cc" "CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o" "gcc" "CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o.d"

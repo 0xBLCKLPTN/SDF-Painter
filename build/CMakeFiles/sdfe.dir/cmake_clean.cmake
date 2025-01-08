@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o.d"
   "CMakeFiles/sdfe.dir/src/advanced_math.cc.o"
   "CMakeFiles/sdfe.dir/src/advanced_math.cc.o.d"
+  "CMakeFiles/sdfe.dir/src/application.cc.o"
+  "CMakeFiles/sdfe.dir/src/application.cc.o.d"
   "CMakeFiles/sdfe.dir/src/callbacks.cc.o"
   "CMakeFiles/sdfe.dir/src/callbacks.cc.o.d"
   "CMakeFiles/sdfe.dir/src/quad_fs.cc.o"

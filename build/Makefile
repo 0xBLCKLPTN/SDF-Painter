@@ -321,6 +321,30 @@ src/advanced_math.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/advanced_math.cc.s
 .PHONY : src/advanced_math.cc.s
 
+src/application.o: src/application.cc.o
+.PHONY : src/application.o
+
+# target to build an object file
+src/application.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/application.cc.o
+.PHONY : src/application.cc.o
+
+src/application.i: src/application.cc.i
+.PHONY : src/application.i
+
+# target to preprocess a source file
+src/application.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/application.cc.i
+.PHONY : src/application.cc.i
+
+src/application.s: src/application.cc.s
+.PHONY : src/application.s
+
+# target to generate assembly for a file
+src/application.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/application.cc.s
+.PHONY : src/application.cc.s
+
 src/callbacks.o: src/callbacks.cc.o
 .PHONY : src/callbacks.o
 
@@ -474,6 +498,9 @@ help:
 	@echo "... src/advanced_math.o"
 	@echo "... src/advanced_math.i"
 	@echo "... src/advanced_math.s"
+	@echo "... src/application.o"
+	@echo "... src/application.i"
+	@echo "... src/application.s"
 	@echo "... src/callbacks.o"
 	@echo "... src/callbacks.i"
 	@echo "... src/callbacks.s"
