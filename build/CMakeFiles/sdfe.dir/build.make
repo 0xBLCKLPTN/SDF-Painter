@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/twofacedjanus/Documents/SDF-Engine
+CMAKE_SOURCE_DIR = /Users/twofacedjanus/Desktop/SDF-Painter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/twofacedjanus/Documents/SDF-Engine/build
+CMAKE_BINARY_DIR = /Users/twofacedjanus/Desktop/SDF-Painter/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/sdfe.dir/depend.make
@@ -73,186 +73,186 @@ CMakeFiles/sdfe.dir/codegen:
 .PHONY : CMakeFiles/sdfe.dir/codegen
 
 CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/sdf_engine_core.cc
+CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/sdf_engine_core.cc
 CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o -MF CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o.d -o CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/sdf_engine_core.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o -MF CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o.d -o CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/sdf_engine_core.cc
 
 CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/sdf_engine_core.cc > CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/sdf_engine_core.cc > CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.i
 
 CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/sdf_engine_core.cc -o CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/sdf_engine_core.cc -o CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.s
 
 CMakeFiles/sdfe.dir/src/advanced_math.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/advanced_math.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/advanced_math.cc
+CMakeFiles/sdfe.dir/src/advanced_math.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/advanced_math.cc
 CMakeFiles/sdfe.dir/src/advanced_math.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sdfe.dir/src/advanced_math.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/advanced_math.cc.o -MF CMakeFiles/sdfe.dir/src/advanced_math.cc.o.d -o CMakeFiles/sdfe.dir/src/advanced_math.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/advanced_math.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sdfe.dir/src/advanced_math.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/advanced_math.cc.o -MF CMakeFiles/sdfe.dir/src/advanced_math.cc.o.d -o CMakeFiles/sdfe.dir/src/advanced_math.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/advanced_math.cc
 
 CMakeFiles/sdfe.dir/src/advanced_math.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/advanced_math.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/advanced_math.cc > CMakeFiles/sdfe.dir/src/advanced_math.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/advanced_math.cc > CMakeFiles/sdfe.dir/src/advanced_math.cc.i
 
 CMakeFiles/sdfe.dir/src/advanced_math.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/advanced_math.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/advanced_math.cc -o CMakeFiles/sdfe.dir/src/advanced_math.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/advanced_math.cc -o CMakeFiles/sdfe.dir/src/advanced_math.cc.s
 
 CMakeFiles/sdfe.dir/src/shader.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/shader.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/shader.cc
+CMakeFiles/sdfe.dir/src/shader.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/shader.cc
 CMakeFiles/sdfe.dir/src/shader.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sdfe.dir/src/shader.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/shader.cc.o -MF CMakeFiles/sdfe.dir/src/shader.cc.o.d -o CMakeFiles/sdfe.dir/src/shader.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/shader.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sdfe.dir/src/shader.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/shader.cc.o -MF CMakeFiles/sdfe.dir/src/shader.cc.o.d -o CMakeFiles/sdfe.dir/src/shader.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/shader.cc
 
 CMakeFiles/sdfe.dir/src/shader.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/shader.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/shader.cc > CMakeFiles/sdfe.dir/src/shader.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/shader.cc > CMakeFiles/sdfe.dir/src/shader.cc.i
 
 CMakeFiles/sdfe.dir/src/shader.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/shader.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/shader.cc -o CMakeFiles/sdfe.dir/src/shader.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/shader.cc -o CMakeFiles/sdfe.dir/src/shader.cc.s
 
 CMakeFiles/sdfe.dir/src/utils.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/utils.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/utils.cc
+CMakeFiles/sdfe.dir/src/utils.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/utils.cc
 CMakeFiles/sdfe.dir/src/utils.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sdfe.dir/src/utils.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/utils.cc.o -MF CMakeFiles/sdfe.dir/src/utils.cc.o.d -o CMakeFiles/sdfe.dir/src/utils.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/utils.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/sdfe.dir/src/utils.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/utils.cc.o -MF CMakeFiles/sdfe.dir/src/utils.cc.o.d -o CMakeFiles/sdfe.dir/src/utils.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/utils.cc
 
 CMakeFiles/sdfe.dir/src/utils.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/utils.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/utils.cc > CMakeFiles/sdfe.dir/src/utils.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/utils.cc > CMakeFiles/sdfe.dir/src/utils.cc.i
 
 CMakeFiles/sdfe.dir/src/utils.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/utils.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/utils.cc -o CMakeFiles/sdfe.dir/src/utils.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/utils.cc -o CMakeFiles/sdfe.dir/src/utils.cc.s
 
 CMakeFiles/sdfe.dir/src/callbacks.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/callbacks.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/callbacks.cc
+CMakeFiles/sdfe.dir/src/callbacks.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/callbacks.cc
 CMakeFiles/sdfe.dir/src/callbacks.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sdfe.dir/src/callbacks.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/callbacks.cc.o -MF CMakeFiles/sdfe.dir/src/callbacks.cc.o.d -o CMakeFiles/sdfe.dir/src/callbacks.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/callbacks.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sdfe.dir/src/callbacks.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/callbacks.cc.o -MF CMakeFiles/sdfe.dir/src/callbacks.cc.o.d -o CMakeFiles/sdfe.dir/src/callbacks.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/callbacks.cc
 
 CMakeFiles/sdfe.dir/src/callbacks.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/callbacks.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/callbacks.cc > CMakeFiles/sdfe.dir/src/callbacks.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/callbacks.cc > CMakeFiles/sdfe.dir/src/callbacks.cc.i
 
 CMakeFiles/sdfe.dir/src/callbacks.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/callbacks.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/callbacks.cc -o CMakeFiles/sdfe.dir/src/callbacks.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/callbacks.cc -o CMakeFiles/sdfe.dir/src/callbacks.cc.s
 
 CMakeFiles/sdfe.dir/src/quad_fs.cc.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/src/quad_fs.cc.o: /Users/twofacedjanus/Documents/SDF-Engine/src/quad_fs.cc
+CMakeFiles/sdfe.dir/src/quad_fs.cc.o: /Users/twofacedjanus/Desktop/SDF-Painter/src/quad_fs.cc
 CMakeFiles/sdfe.dir/src/quad_fs.cc.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sdfe.dir/src/quad_fs.cc.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/quad_fs.cc.o -MF CMakeFiles/sdfe.dir/src/quad_fs.cc.o.d -o CMakeFiles/sdfe.dir/src/quad_fs.cc.o -c /Users/twofacedjanus/Documents/SDF-Engine/src/quad_fs.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sdfe.dir/src/quad_fs.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/src/quad_fs.cc.o -MF CMakeFiles/sdfe.dir/src/quad_fs.cc.o.d -o CMakeFiles/sdfe.dir/src/quad_fs.cc.o -c /Users/twofacedjanus/Desktop/SDF-Painter/src/quad_fs.cc
 
 CMakeFiles/sdfe.dir/src/quad_fs.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/src/quad_fs.cc.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/src/quad_fs.cc > CMakeFiles/sdfe.dir/src/quad_fs.cc.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/src/quad_fs.cc > CMakeFiles/sdfe.dir/src/quad_fs.cc.i
 
 CMakeFiles/sdfe.dir/src/quad_fs.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/src/quad_fs.cc.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/src/quad_fs.cc -o CMakeFiles/sdfe.dir/src/quad_fs.cc.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/src/quad_fs.cc -o CMakeFiles/sdfe.dir/src/quad_fs.cc.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_draw.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_draw.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_draw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_draw.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_draw.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_draw.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_draw.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_draw.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_draw.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_tables.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_tables.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_tables.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_tables.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_tables.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_tables.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_tables.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_tables.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_tables.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_widgets.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_widgets.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_widgets.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_widgets.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_widgets.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_widgets.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_widgets.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_widgets.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_glfw.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_glfw.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_glfw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_glfw.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_glfw.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_glfw.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_glfw.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_glfw.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_glfw.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_opengl3.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_opengl3.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_opengl3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_opengl3.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_opengl3.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_opengl3.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_impl_opengl3.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_impl_opengl3.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_impl_opengl3.cpp.s
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o: CMakeFiles/sdfe.dir/flags.make
-CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o: /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_demo.cpp
+CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o: /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_demo.cpp
 CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o: CMakeFiles/sdfe.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o -c /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_demo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o -MF CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o.d -o CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.o -c /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_demo.cpp
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_demo.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_demo.cpp > CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.i
 
 CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Documents/SDF-Engine/include/imgui/imgui_demo.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/twofacedjanus/Desktop/SDF-Painter/include/imgui/imgui_demo.cpp -o CMakeFiles/sdfe.dir/include/imgui/imgui_demo.cpp.s
 
 # Object files for target sdfe
 sdfe_OBJECTS = \
@@ -290,7 +290,7 @@ sdfe: CMakeFiles/sdfe.dir/build.make
 sdfe: /usr/local/lib/libGLEW.2.2.0.dylib
 sdfe: /usr/local/lib/libglfw.3.4.dylib
 sdfe: CMakeFiles/sdfe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable sdfe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable sdfe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sdfe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -302,6 +302,6 @@ CMakeFiles/sdfe.dir/clean:
 .PHONY : CMakeFiles/sdfe.dir/clean
 
 CMakeFiles/sdfe.dir/depend:
-	cd /Users/twofacedjanus/Documents/SDF-Engine/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/twofacedjanus/Documents/SDF-Engine /Users/twofacedjanus/Documents/SDF-Engine /Users/twofacedjanus/Documents/SDF-Engine/build /Users/twofacedjanus/Documents/SDF-Engine/build /Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles/sdfe.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/twofacedjanus/Desktop/SDF-Painter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/twofacedjanus/Desktop/SDF-Painter /Users/twofacedjanus/Desktop/SDF-Painter /Users/twofacedjanus/Desktop/SDF-Painter/build /Users/twofacedjanus/Desktop/SDF-Painter/build /Users/twofacedjanus/Desktop/SDF-Painter/build/CMakeFiles/sdfe.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/sdfe.dir/depend
 
