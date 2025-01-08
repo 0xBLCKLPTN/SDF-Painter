@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/twofacedjanus/Documents/SDF-Painter
+CMAKE_SOURCE_DIR = /Users/twofacedjanus/Documents/SDF-Engine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/twofacedjanus/Documents/SDF-Painter/build
+CMAKE_BINARY_DIR = /Users/twofacedjanus/Documents/SDF-Engine/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Painter/build/CMakeFiles /Users/twofacedjanus/Documents/SDF-Painter/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles /Users/twofacedjanus/Documents/SDF-Engine/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Painter/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -297,6 +297,30 @@ include/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/include/imgui/imgui_widgets.cpp.s
 .PHONY : include/imgui/imgui_widgets.cpp.s
 
+src/advanced_math.o: src/advanced_math.cc.o
+.PHONY : src/advanced_math.o
+
+# target to build an object file
+src/advanced_math.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/advanced_math.cc.o
+.PHONY : src/advanced_math.cc.o
+
+src/advanced_math.i: src/advanced_math.cc.i
+.PHONY : src/advanced_math.i
+
+# target to preprocess a source file
+src/advanced_math.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/advanced_math.cc.i
+.PHONY : src/advanced_math.cc.i
+
+src/advanced_math.s: src/advanced_math.cc.s
+.PHONY : src/advanced_math.s
+
+# target to generate assembly for a file
+src/advanced_math.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/advanced_math.cc.s
+.PHONY : src/advanced_math.cc.s
+
 src/callbacks.o: src/callbacks.cc.o
 .PHONY : src/callbacks.o
 
@@ -321,30 +345,6 @@ src/callbacks.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/callbacks.cc.s
 .PHONY : src/callbacks.cc.s
 
-src/main.o: src/main.cc.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/main.cc.o
-.PHONY : src/main.cc.o
-
-src/main.i: src/main.cc.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/main.cc.i
-.PHONY : src/main.cc.i
-
-src/main.s: src/main.cc.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/main.cc.s
-.PHONY : src/main.cc.s
-
 src/quad_fs.o: src/quad_fs.cc.o
 .PHONY : src/quad_fs.o
 
@@ -368,6 +368,78 @@ src/quad_fs.s: src/quad_fs.cc.s
 src/quad_fs.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/quad_fs.cc.s
 .PHONY : src/quad_fs.cc.s
+
+src/sdf_engine_core.o: src/sdf_engine_core.cc.o
+.PHONY : src/sdf_engine_core.o
+
+# target to build an object file
+src/sdf_engine_core.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.o
+.PHONY : src/sdf_engine_core.cc.o
+
+src/sdf_engine_core.i: src/sdf_engine_core.cc.i
+.PHONY : src/sdf_engine_core.i
+
+# target to preprocess a source file
+src/sdf_engine_core.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.i
+.PHONY : src/sdf_engine_core.cc.i
+
+src/sdf_engine_core.s: src/sdf_engine_core.cc.s
+.PHONY : src/sdf_engine_core.s
+
+# target to generate assembly for a file
+src/sdf_engine_core.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/sdf_engine_core.cc.s
+.PHONY : src/sdf_engine_core.cc.s
+
+src/shader.o: src/shader.cc.o
+.PHONY : src/shader.o
+
+# target to build an object file
+src/shader.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/shader.cc.o
+.PHONY : src/shader.cc.o
+
+src/shader.i: src/shader.cc.i
+.PHONY : src/shader.i
+
+# target to preprocess a source file
+src/shader.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/shader.cc.i
+.PHONY : src/shader.cc.i
+
+src/shader.s: src/shader.cc.s
+.PHONY : src/shader.s
+
+# target to generate assembly for a file
+src/shader.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/shader.cc.s
+.PHONY : src/shader.cc.s
+
+src/utils.o: src/utils.cc.o
+.PHONY : src/utils.o
+
+# target to build an object file
+src/utils.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/utils.cc.o
+.PHONY : src/utils.cc.o
+
+src/utils.i: src/utils.cc.i
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/utils.cc.i
+.PHONY : src/utils.cc.i
+
+src/utils.s: src/utils.cc.s
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/src/utils.cc.s
+.PHONY : src/utils.cc.s
 
 # Help Target
 help:
@@ -399,15 +471,24 @@ help:
 	@echo "... include/imgui/imgui_widgets.o"
 	@echo "... include/imgui/imgui_widgets.i"
 	@echo "... include/imgui/imgui_widgets.s"
+	@echo "... src/advanced_math.o"
+	@echo "... src/advanced_math.i"
+	@echo "... src/advanced_math.s"
 	@echo "... src/callbacks.o"
 	@echo "... src/callbacks.i"
 	@echo "... src/callbacks.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 	@echo "... src/quad_fs.o"
 	@echo "... src/quad_fs.i"
 	@echo "... src/quad_fs.s"
+	@echo "... src/sdf_engine_core.o"
+	@echo "... src/sdf_engine_core.i"
+	@echo "... src/sdf_engine_core.s"
+	@echo "... src/shader.o"
+	@echo "... src/shader.i"
+	@echo "... src/shader.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 

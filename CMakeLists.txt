@@ -1,42 +1,75 @@
-cmake_minimum_required(VERSION 3.10)
-project(SDF_Engine VERSION 0.1.0 LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.15)
+project(SDF_ENGINE VERSION 2.0.0 LANGUAGES C CXX)
 
+# CMAKE CONFIGURATION
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Set CMAKE_TOOLCHAIN_FILE to the path of the vcpkg toolchain file
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
-
-# Find packages
-find_package(GLEW REQUIRED)
-find_package(glfw3 REQUIRED)
-
-# Source files
 set(SOURCES
-  src/main.cc
-  src/quad_fs.cc
-  src/callbacks.cc
-  include/imgui/imgui.cpp
-  include/imgui/imgui_draw.cpp
-  include/imgui/imgui_tables.cpp
-  include/imgui/imgui_widgets.cpp
-  include/imgui/imgui_impl_glfw.cpp
-  include/imgui/imgui_impl_opengl3.cpp
-  include/imgui/imgui_demo.cpp
+    src/sdf_engine_core.cc
+    src/advanced_math.cc
+    src/shader.cc
+    src/utils.cc
+    src/callbacks.cc
+    src/quad_fs.cc
+    include/imgui/imgui.cpp
+    include/imgui/imgui_draw.cpp
+    include/imgui/imgui_tables.cpp
+    include/imgui/imgui_widgets.cpp
+    include/imgui/imgui_impl_glfw.cpp
+    include/imgui/imgui_impl_opengl3.cpp
+    include/imgui/imgui_demo.cpp
 )
 
-# Include directories
-set(INCLUDE_DIRS
-  src
-  include
-  include/imgui
-)
+if (UNIX OR APPLE)
+    find_package(GLEW REQUIRED)
+    find_package(glfw3 REQUIRED)
+else()
+    set(GLFW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/win_libs/glfw/include)
+    set(GLFW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glfw/lib-vc2022/glfw3.lib)
 
-# Create the executable
+    set(GLEW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/win_libs/glew/include)
+    set(GLEW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glew/lib/Release/x64/glew32.lib)
+endif(UNIX OR APPLE)
+
+# All include files such as *.h
+if (UNIX OR APPLE)
+    set(INCLUDE_DIRS
+      src
+      include
+      include/imgui
+    )
+else()
+    set(INCLUDE_DIRS
+        src
+        include
+        include/imgui
+        ${GLFW_INCLUDE_DIRS}
+        ${GLEW_INCLUDE_DIRS}
+        include/GL/eglew.h
+        include/GL/glew.h
+        include/GL/glxew.h
+        include/GL/wglew.h
+    )
+endif(UNIX OR APPLE)
+
+# Create executable
 add_executable(sdfe ${SOURCES})
 
-# Include directories
+
+# Include Directories
 target_include_directories(sdfe PRIVATE ${INCLUDE_DIRS})
 
-# Link libraries
-target_link_libraries(sdfe PRIVATE GLEW::GLEW glfw)
+# Link Libraries
+if (UNIX OR APPLE)
+    target_link_libraries(sdfe PRIVATE GLEW::GLEW glfw)
+else()
+    target_link_libraries(sdfe PRIVATE ${GLEW_LIBRARIES} ${GLFW_LIBRARIES})
+endif(UNIX OR APPLE)
+
+if (WIN32)
+    target_link_libraries(sdfe PRIVATE OpenGL32)
+
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MD")
+endif(WIN32)

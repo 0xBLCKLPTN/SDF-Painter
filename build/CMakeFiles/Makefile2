@@ -54,10 +54,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/twofacedjanus/Documents/SDF-Painter
+CMAKE_SOURCE_DIR = /Users/twofacedjanus/Documents/SDF-Engine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/twofacedjanus/Documents/SDF-Painter/build
+CMAKE_BINARY_DIR = /Users/twofacedjanus/Documents/SDF-Engine/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -85,14 +85,14 @@ clean: CMakeFiles/sdfe.dir/clean
 CMakeFiles/sdfe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdfe.dir/build.make CMakeFiles/sdfe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/twofacedjanus/Documents/SDF-Painter/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target sdfe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target sdfe"
 .PHONY : CMakeFiles/sdfe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdfe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Painter/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sdfe.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Painter/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/twofacedjanus/Documents/SDF-Engine/build/CMakeFiles 0
 .PHONY : CMakeFiles/sdfe.dir/rule
 
 # Convenience name for target.

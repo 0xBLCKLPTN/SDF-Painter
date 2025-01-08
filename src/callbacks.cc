@@ -1,5 +1,11 @@
-#include "../include/callbacks.h"
+//
+//  callbacks.cc
+//  SDF_ENGINE
+//
+//  Created by Даниил Ермолаев on 08.01.2025.
+//
 
+#include "../include/callbacks.hh"
 
 // ===========================================================
 //
@@ -10,6 +16,14 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
   printf("XPOS: %f - YPOS: %f\r", xpos, ypos);
 #endif
   return;
+}
+
+// Resize our window.
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+#if (LOG_LEVEL == 1)
+  printf("FSC: %d-%d\n", width, height);
+#endif
+  glViewport(0, 0, width, height); // TODO: In HDPI can be errors. I try in on MacBook 11.1. And have errors...
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
@@ -27,6 +41,3 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
   return;
 }
-
-
-

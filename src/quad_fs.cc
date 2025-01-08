@@ -1,4 +1,4 @@
-#include "../include/quad_fs.h"
+#include "../include/quad_fs.hh"
 
 
 // Initialize fullscreen quad.
