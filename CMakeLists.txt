@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
+    src/application.cc
     src/sdf_engine_core.cc
     src/advanced_math.cc
     src/shader.cc

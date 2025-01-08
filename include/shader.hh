@@ -15,9 +15,14 @@
 #if defined(__APPLE__) || defined(__linux__)
     #include <GL/glew.h>
     #include <GLFW/glfw3.h>
+#else
+    #include "include/GL/glew.h"
+    #include <GLFW/glfw3.h>
 #endif
 
 #include "utils.hh"
+
+
 typedef struct {
     GLuint shader_program;
     GLuint (*compile_shader)(const char*, GLenum);
