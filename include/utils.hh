@@ -10,7 +10,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <GL/glew.h>
+
+#if defined(__APPLE__) || defined(__linux__)
+    #include <GL/glew.h>
+#elif defined(_W32)
+    #include "GL/glew.h"
+#endif
+
 
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -35,12 +35,12 @@ else()
     # Cross-compilation for Windows
     if (ARCH EQUAL "x64")
         set(GLFW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glfw_x64/lib-vc2022/glfw3.lib)
-        set(GLFW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/GLFW_x64)
+        set(GLFW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/x64/GLFW)
         set(GLEW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/win_libs/glew/include)
         set(GLEW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glew/lib/Release/x64/glew32.lib)
     else()
         set(GLFW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glfw_x32/lib-vc2022/glfw3.lib)
-        set(GLFW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/GLFW_x32)
+        set(GLFW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/include/x32/GLFW)
         set(GLEW_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/win_libs/glew/include)
         set(GLEW_LIBRARIES ${CMAKE_SOURCE_DIR}/win_libs/glew/lib/Release/Win32/glew32.lib)
     endif()
@@ -58,9 +58,10 @@ else()
         src
         include
         include/imgui
-        ${GLFW_INCLUDE_DIRS}
         ${GLEW_INCLUDE_DIRS}
     )
+    # Add GLFW include directory to the system include path
+    include_directories(SYSTEM ${GLFW_INCLUDE_DIRS})
 endif()
 
 if (NOT APPLE)

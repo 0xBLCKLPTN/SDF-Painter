@@ -14,15 +14,20 @@
 
 #if defined(__APPLE__) || defined(__linux__)
     #include <GL/glew.h>
-    #include <GLFW/glfw3.h>
-#else
+#elif defined(_W32)
     #include "GL/glew.h"
-    #if defined(__x86_64__) || defined(_M_X64)
-        #include "GLFW_x64/glfw3.h"
-    #else
-        #include "GLFW_x32/glfw3.h"
-    #endif
 #endif
+
+#if defined(__x86_64__) || defined(_M_X64)
+    #include "GLFW/x64/glfw3.h"
+    #include "GLFW/x64/glfw3native.h"
+#elif defined(i386) || defined(__i386__) || defined(__i386) || defined(_M_IX86)
+    #include "GLFW/x32/glfw3.h"
+    #include "GLFW/x32/glfw3native.h"
+#else
+    #define PLATFROM_DOEST_SUPPORTED
+#endif
+
 
 #include "utils.hh"
 
