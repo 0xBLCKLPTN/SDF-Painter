@@ -19,13 +19,18 @@
     #define LOG_LEVEL 3
 #endif
 
+
+
 #if defined(__APPLE__) || defined(__linux__)
     #include <GL/glew.h>
     #include <GLFW/glfw3.h>
-    #include <unistd.h>
-#elif defined(WIN32)
+#else
     #include "GL/glew.h"
-    #include <GLFW/glfw3.h>
+    #if defined(__x86_64__) || defined(_M_X64)
+        #include "GLFW_x64/glfw3.h"
+    #else
+        #include "GLFW_x32/glfw3.h"
+    #endif
 #endif
 
 // ================== INCLUDE IMGUI LIBRARIES =============

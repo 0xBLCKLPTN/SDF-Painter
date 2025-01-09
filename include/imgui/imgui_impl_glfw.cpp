@@ -100,20 +100,29 @@
 #endif
 
 // GLFW
-#include <GLFW/glfw3.h>
+#if defined(__APPLE__) || defined(__linux__)
+    #include <GLFW/glfw3.h>
+#else
+   #if defined(__x86_64__) || defined(_M_X64)
+        #include "../GLFW_x64/glfw3.h"
+    #else
+        #include "../GLFW_x32/glfw3.h"
+    #endif
+#endif
+
 
 #ifdef _WIN32
 #undef APIENTRY
 #ifndef GLFW_EXPOSE_NATIVE_WIN32
 #define GLFW_EXPOSE_NATIVE_WIN32
 #endif
-#include <GLFW/glfw3native.h>   // for glfwGetWin32Window()
+#include "../GLFW_x32/glfw3native.h"   // for glfwGetWin32Window()
 #endif
 #ifdef __APPLE__
 #ifndef GLFW_EXPOSE_NATIVE_COCOA
 #define GLFW_EXPOSE_NATIVE_COCOA
 #endif
-#include <GLFW/glfw3native.h>   // for glfwGetCocoaWindow()
+#include "../GLFW/glfw3native.h"   // for glfwGetCocoaWindow()
 #endif
 #ifndef _WIN32
 #include <unistd.h>             // for usleep()

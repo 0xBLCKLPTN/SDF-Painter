@@ -10,13 +10,18 @@
 
 
 
-#if defined(__linux__) || defined(__APPLE__)
-  #include <GL/glew.h>
-#else
-  #include "../include/GL/glew.h"
-#endif
 
-#include <GLFW/glfw3.h>
+#if defined(__APPLE__) || defined(__linux__)
+    #include <GL/glew.h>
+    #include <GLFW/glfw3.h>
+#else
+    #include "GL/glew.h"
+    #if defined(__x86_64__) || defined(_M_X64)
+        #include "GLFW_x64/glfw3.h"
+    #else
+        #include "GLFW_x32/glfw3.h"
+    #endif
+#endif
 
 #include <stdlib.h>
 
